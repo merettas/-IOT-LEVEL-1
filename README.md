@@ -39,30 +39,19 @@
 
 ### CODE
 
- int animationspeed = 0;
-
-void setup() 
-
- {
-
- pinMode(LED_BUILTIN, OUTPUT);
- 
- }
-
-void loop()
-
- {
-
+`
+  void setup() 
+  {
+  pinMode(LED_BUILTIN, OUTPUT);
+  }
+  void loop()
+  {
   digitalWrite(LED_BUILTIN, HIGH);
-  
-  delay(1000);
-  
+  delay(1000); // Wait for 1000 millisecond(s)
   digitalWrite(LED_BUILTIN, LOW);
-  
-  delay(1000);
-  
- }
-
+  delay(1000); // Wait for 1000 millisecond(s)
+  } 
+`
   
 ## EXPERIMENT 2 - TRAFFIC LIGHT
 

@@ -859,142 +859,521 @@ Serial.println(val);
 ### CODE
 
 int a=7;
+
 int b=6;
+
 int c=5;
+
 int d=10;
+
 int e=11;
+
 int f=8;
+
 int g=9;
+
 int dp=4;
+
 void digital_0(void) 
+
 {
+
 unsigned char j;
+
 digitalWrite(a,HIGH);
+
 digitalWrite(b,HIGH);
+
 digitalWrite(c,HIGH);
+
 digitalWrite(d,HIGH);
+
 digitalWrite(e,HIGH);
+
 digitalWrite(f,HIGH);
+
 digitalWrite(g,LOW);
+
 digitalWrite(dp,LOW);
+
 }
+
 void digital_1(void) 
+
 {
+
 unsigned char j;
+
 digitalWrite(c,HIGH);
+
 digitalWrite(b,HIGH);
+
 for(j=7;j<=11;j++)
+
 digitalWrite(j,LOW);
+
 digitalWrite(dp,LOW);
+
 }
+
 void digital_2(void) 
+
 {
+
 unsigned char j;
+
 digitalWrite(b,HIGH);
+
 digitalWrite(a,HIGH);
+
 for(j=9;j<=11;j++)
+
 digitalWrite(j,HIGH);
+
 digitalWrite(dp,LOW);
+
 digitalWrite(c,LOW);
+
 digitalWrite(f,LOW);
+
 }
+
 void digital_3(void) 
-{digitalWrite(g,HIGH);
+
+{
+
+digitalWrite(g,HIGH);
+
 digitalWrite(a,HIGH);
+
 digitalWrite(b,HIGH);
+
 digitalWrite(c,HIGH);
+
 digitalWrite(d,HIGH);
+
 digitalWrite(dp,LOW);
+
 digitalWrite(f,LOW);
+
 digitalWrite(e,LOW);
+
 }
+
 void digital_4(void) 
-{digitalWrite(c,HIGH);
+
+{
+
+digitalWrite(c,HIGH);
+
 digitalWrite(b,HIGH);
+
 digitalWrite(f,HIGH);
+
 digitalWrite(g,HIGH);
+
 digitalWrite(dp,LOW);
+
 digitalWrite(a,LOW);
+
 digitalWrite(e,LOW);
+
 digitalWrite(d,LOW);
+
 }
+
 void digital_5(void) 
+
 {
+
 unsigned char j;
+
 digitalWrite(a,HIGH);
+
 digitalWrite(b, LOW);
+
 digitalWrite(c,HIGH);
+
 digitalWrite(d,HIGH);
+
 digitalWrite(e, LOW);
+
 digitalWrite(f,HIGH);
+
 digitalWrite(g,HIGH);
+
 digitalWrite(dp,LOW);
+
 }
+
 void digital_6(void) 
+
 {
+
 unsigned char j;
+
 for(j=7;j<=11;j++)
+
 digitalWrite(j,HIGH);
+
 digitalWrite(c,HIGH);
+
 digitalWrite(dp,LOW);
+
 digitalWrite(b,LOW);
+
 }
+
 void digital_7(void) 
+
 {
+
 unsigned char j;
+
 for(j=5;j<=7;j++)
+
 digitalWrite(j,HIGH);
+
 digitalWrite(dp,LOW);
+
 for(j=8;j<=11;j++)
+
 digitalWrite(j,LOW);
+
 }
+
 void digital_8(void) 
+
 {
+
 unsigned char j;
+
 for(j=5;j<=11;j++)
+
 digitalWrite(j,HIGH);
+
 digitalWrite(dp,LOW);
+
 }
+
 void digital_9(void) 
+
 {
+
 unsigned char j;
+
 digitalWrite(a,HIGH);
+
 digitalWrite(b,HIGH);
+
 digitalWrite(c,HIGH);
+
 digitalWrite(d,HIGH);
+
 digitalWrite(e, LOW);
+
 digitalWrite(f,HIGH);
+
 digitalWrite(g,HIGH);
+
 digitalWrite(dp,LOW);
+
 }
+
 void setup()
+
 {
+
 int i;// set variable
+
 for(i=4;i<=11;i++)
+
 pinMode(i,OUTPUT);
+
 }
+
 void loop()
+
 {
+
 while(1)
+
 {
+
 digital_0();
+
 delay(1000);
+
 digital_1();
+
 delay(1000);
+
 digital_2();
+
 delay(1000); 
+
 digital_3();
+
 delay(1000);
+
 digital_4();
+
 delay(1000); 
+
 digital_5();
+
 delay(1000); 
+
 digital_6();
+
 delay(1000);
+
 digital_7();
+
 delay(1000); 
+
 digital_8();
+
 delay(1000); 
+
 digital_9();
+
 delay(1000); 
+
 }}
+
+## ASSIGNMENT 1- AUTOMATIC NIGHT LAMP USING LED AND LDR 
+
+![ass 1](https://user-images.githubusercontent.com/84284079/147559669-e8bece9f-86d7-42fd-8584-61032dec66ee.png)
+
+### CODE
+
+void setup()
+
+  {
+  
+   Serial.begin(9600);
+   
+   pinMode(10,OUTPUT);
+   
+  pinMode(A0, INPUT); 
+  
+  }
+
+void loop()
+
+  {
+  
+    int c=analogRead(A0);  
+ 
+      
+    if(c<500)
+    
+      {
+      
+        digitalWrite(10,LOW);
+        
+      }
+    
+    else
+    
+      {
+      
+        digitalWrite(10,HIGH);
+        
+      }
+      
+}
+
+
+## ASSIGNMENT 2- DIGITAL DICE USING 6 LEDS AND 1 PUSHBUTTON
+
+![ass 2](https://user-images.githubusercontent.com/84284079/147560102-81d63cb8-4f2f-473c-9a02-92ec9ecb98a2.png)
+
+### CODE
+
+#define DEBUG 0
+
+
+int first = 2;
+
+int second = 3;
+
+int third = 4;
+
+int fourth = 5;
+
+int fifth = 6;
+
+int sixth = 7;
+
+
+int button = 12;
+
+int pressed = 0;
+
+void setup()
+
+{
+ 
+  for (int i=first; i<=sixth; i++)
+  
+  {
+  
+    pinMode(i, OUTPUT);
+    
+  }
+ 
+  pinMode(button, INPUT);
+  
+
+  randomSeed(analogRead(0));
+
+ 
+  #ifdef DEBUG
+  
+    Serial.begin(9600);
+    
+  #endif
+
+}
+
+void buildUpTension() {
+  
+  for (int i=first; i<=sixth; i++)
+  
+  {
+  
+    if (i!=first)
+    
+    {
+    
+      digitalWrite(i-1, LOW);
+      
+    }
+    
+    digitalWrite(i, HIGH);
+    
+    delay(100);
+    
+  }
+  
+  for (int i=sixth; i>=first; i--) 
+  
+  {
+  
+    if (i!=sixth)
+    
+    {
+    
+      digitalWrite(i+1, LOW);
+      
+    }
+    
+    digitalWrite(i, HIGH);
+    
+    delay(100);
+    
+  }
+  
+}
+
+void showNumber(int number)
+
+{
+
+  digitalWrite(first, HIGH);
+  
+  if (number >= 2)
+  
+  {
+  
+    digitalWrite(second, HIGH);
+    
+  }
+  
+  if (number >= 3)
+  
+  {
+  
+   digitalWrite(third, HIGH);   
+    
+  }
+  
+  if (number >= 4)
+  
+  {
+  
+    digitalWrite(fourth, HIGH);    
+    
+  }
+  
+  if (number >= 5)
+  
+  {
+  
+    digitalWrite(fifth, HIGH);   
+    
+  }
+  
+  if (number == 6) 
+  
+  {
+  
+    digitalWrite(sixth, HIGH); 
+    
+  }
+  
+}
+
+int throwDice() {
+  
+  int randNumber = random(1,7);
+  
+  #ifdef DEBUG
+  
+    Serial.println(randNumber);
+    
+  #endif
+  
+  return randNumber;
+  
+}
+
+void setAllLEDs(int value) 
+
+{
+
+  for (int i=first; i<=sixth; i++)
+  
+  {
+  
+    digitalWrite(i, value);
+    
+  }
+  
+}
+
+void loop()
+
+{
+  
+  pressed = digitalRead(button);
+
+  if (pressed == HIGH)
+  
+  {
+  
+    setAllLEDs(LOW);
+    
+    buildUpTension();
+    
+    int thrownNumber = throwDice();
+    
+    showNumber(thrownNumber);
+    
+  } 
+
+}
+
+
